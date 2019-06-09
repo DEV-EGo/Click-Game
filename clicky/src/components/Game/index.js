@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "../Card";
-import cardData from "../../fighter.json";
+import Data from "../../fighter.json";
 import Nav from "../Navbar";
 import Jumbotron from "../Jumbotron";
 import './style.scss';
@@ -10,18 +10,18 @@ class Game extends Component {
     state = {
         score: 0,
         highScore: 0,
-        cardData,
+        Data,
         clickedList: []
     }
 
     componentDidMount() {
-        const { cardData } = this.state;
-        this.RadomizeCards(cardData);
+        const { Data } = this.state;
+        this.RadomizeCards(Data);
     }
 
     handleClick = (id) => {
-        const { score, clickedList, cardData, highScore } = this.state;
-        this.RadomizeCards(cardData)
+        const { score, clickedList, Data, highScore } = this.state;
+        this.RadomizeCards(Data)
         const ClickedOn = clickedList.includes(id);
         if (ClickedOn) {
             const bestScore = Math.max(score, highScore)
@@ -32,7 +32,7 @@ class Game extends Component {
                 score: score + 1,
                 clickedList: [...clickedList, id]
             })
-            if (newScore === cardData.length)
+            if (newScore === Data.length)
                 this.resetGame(newScore);
         }
     }
@@ -69,7 +69,7 @@ class Game extends Component {
                 />
                 <Jumbotron />
                 <div class="cards">
-                    {this.state.cardData.map((card) => (
+                    {this.state.Data.map((card) => (
                         <Card
                             name={card.name}
                             image={card.image}
